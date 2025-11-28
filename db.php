@@ -1,23 +1,26 @@
 <?php
 
-$host = 'localhost';
-$db = 'pawplanner';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+class Database {
+    private static $instance = null;
+    private $pdo;
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    private function __construct() {
+        $host = 'localhost';
+        $db = 'pawplanner';
+        $user = 'root';
+        $pass = '';
+        $charset = 'utf8mb4';
 
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,   // Zeigt SQL-Fehler an
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,         // Gibt Daten als Array zurück
-    PDO::ATTR_EMULATE_PREPARES => false,                    // Erhöht Sicherheit gegen SQL-Injections
-];
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-    //Wenn hier nichts passiert, Verbindung erfolgreich!
-} catch (\PDOException $e) {
-    // Falls es knallt: Fehler anzeigen und abbrechen!
-    die("Verbindungsfehler: " . $e->getMessage());
+        $this->pdo = new PDO($dsn, $user, $pass);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    public static function connect () {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+        return self::$instance->pdo;
+    }
 }
