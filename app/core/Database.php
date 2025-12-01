@@ -11,7 +11,7 @@ class Database {
         $pass = '';
         $charset = 'utf8mb4';
 
-        $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
         $this->pdo = new PDO($dsn, $user, $pass);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
