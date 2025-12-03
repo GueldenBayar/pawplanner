@@ -42,5 +42,10 @@ class Dog {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function delete($id) {
+        $stmt = $this->db->prepare("DELETE FROM dogs WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
 
 }
