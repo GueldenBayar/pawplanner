@@ -47,5 +47,20 @@ class Dog {
         return $stmt->execute([$id]);
     }
 
+    public function create($userId, $name, $breed, $age, $description, $image) {
+        $stmt = $this->db->prepare("
+        INSERT INTO dogs (user_id, name, breed, age, description, image)
+        VALUES (?, ?, ?, ?, ?, ?)
+        ");
+
+        return $stmt->execute([
+            $userId,
+            $name,
+            $breed,
+            $age,
+            $description,
+            $image
+        ]);
+    }
 
 }

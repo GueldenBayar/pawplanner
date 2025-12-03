@@ -10,12 +10,26 @@ class DogController {
             $description = trim($_POST['description']);
             $userId = $_SESSION['user_id'];
 
-            if (!$name || !$breed  || !$age) {
-                die("Bitte alle Pflichtfelder ausfüllen!");
+            // Dateiupload
+            $imageName = null;
+
+            if (!empty($_FILES['image']['name'])) {
+                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $imageName = uniqid() . "." . $extension; // uniqid verhindert doppelte Dateinamen
+                //Bild wird physisch gespeichert -> nur der Name geht in die Datenbank
+                move_uploaded_file(
+                    $_FILES['image']['tmp_name'],
+                    __DIR__ . '/../../public/uploads/dogs/' . $imageName
+                );
             }
 
             $dog = new Dog();
-            $dog->create($userId, $name, $breed, $age, $description);
+            $dog->create($userId, $name, $breed, $age, $description, $imageName);
+
+
+            if (!$name || !$breed  || !$age) {
+                die("Bitte alle Pflichtfelder ausfüllen!");
+            }
 
             header("Location: my_dogs.php");
             exit;
