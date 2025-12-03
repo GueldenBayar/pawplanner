@@ -12,5 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 <ul>
     <li><a href="dashboard.php">Dashboard</a></li>
     <li><a href="add_dog.php">Hund hinzufügen</a></li>
+    <li><a href="my_dogs.php">My Dogs</a></li>
     <li><a href="logout.php">Logout</a></li>
 </ul>

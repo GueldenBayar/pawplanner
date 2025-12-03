@@ -11,7 +11,7 @@ $dogModel = new Dog();
 $dogs = $dogModel->getByUser($_SESSION['user_id']);
 ?>
 
-<h2>My Dogs</h2>
+<h2>My Dogs ⭐</h2>
 
 <a href="add_dog.php">➕ New Dog</a><br><br>
 
