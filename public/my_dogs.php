@@ -22,7 +22,7 @@ $dogs = $dogModel->getByUser($_SESSION['user_id']);
     Age: <?= $dog['age'] ?><br>
     Description: <?= htmlspecialchars($dog['description']) ?><br><br>
     <?php if ($dog['image']): ?>
-    <img src="uploads/dogs/<?= $dog['image'] ?>" width="150"><br>
+    <img src="uploads/<?= $dog['image'] ?>" width="150"><br>
     <?php endif; ?>
     <a href="delete_dog.php?id=<?= $dog['id'] ?>">Löschen</a>
 </div>

@@ -70,8 +70,9 @@ $dogs = $dogModel->getAll();
         <?php endif; ?>
 
         <h3><?= htmlspecialchars($dog['name']) ?></h3>
-        <p><?= htmlspecialchars($dog['breed']) ?> • <?= $dog['age'] ?>years old</p>
-        <p class="owner">Besitzer: <?=  htmlspecialchars($dog['username'])?></p>
+        <p><?= htmlspecialchars($dog['breed']) ?></p>
+        <p><?= htmlspecialchars($dog['age']) ?> years old </p>
+        <p class="owner">Owner: <?=  htmlspecialchars($dog['username'])?></p>
         <p><?= htmlspecialchars($dog['description']) ?></p>
     </div>
     <?php endforeach; ?>

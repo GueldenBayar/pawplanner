@@ -19,7 +19,7 @@ $controller->store();
     <label for="age"><input type="number" name="age" placeholder="Age" required></label><br><br>
     <label for="description"><textarea name="description" placeholder="describe your furry friend.."></textarea></label><br><br>
 
-    <input type="file" name="image" required><br><br>
+    <input type="file" name="image" accept="image/*, .jpg" required><br><br>
 
     <button type="submit">Save</button>
 </form>
