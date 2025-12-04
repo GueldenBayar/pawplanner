@@ -54,12 +54,15 @@ $randomDog = $filtered[array_rand($filtered)];
         <p><?= $randomDog['age'] ?> years old</p>
         <p>Owner: <?= $randomDog['username'] ?></p>
 
-        <form method="POST" action="like.php">
-            <input type="hidden" name="to_user_id" value="<?= $randomDog['user_id'] ?>">
-            <button type="submit"><a href="like.php?id=<?= $dog['user_id'] ?>">♥️ Like</a></button>
+        <form method="GET" action="like.php">
+            <input type="hidden" name="id" value="<?= $randomDog['user_id'] ?>">
+            <button type="submit">♥️ Like</button>
         </form>
 
-        <a href="playmatch.php"><button>❌ Nope</button></a>
+        <a href="playmatch.php">
+            <button>❌ Nope</button>
+        </a>
+
 
     </div>
 </body>
