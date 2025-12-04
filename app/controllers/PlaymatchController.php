@@ -1,27 +1,42 @@
 <?php
-session_start();
-
-require_once __DIR__ . '/../models/Dog.php';
-require_once __DIR__ . '/../models/Like.php';
-require_once __DIR__ . '/../models/Match.php';
+require_once __DIR__ . '/../core/Database.php';
 
 class PlaymatchController {
-    public function swipe() {
-        $dogModel = new Dog();
-        return $dogModel->getAll();
-    }
+
 
     public function like() {
-        $fromUserId = $_SESSION['user_id'];
-        $toUserId = $_POST['to_user_id'];
+        if (!isset ($_SESSION['user_id'])) {
+            die("Nicht eingeloggt!");
+        }
 
-        $like = new Like();
-        $like->addLike($fromUserId, $toUserId);
+        if(!isset($_GET['id'])) {
+            die("Kein Ziel-User");
+        }
 
-        //Gegenseitiger Like
-        if ($like->checkMutualLike($fromUserId, $toUserId)) {
-            $match = new MatchModel();
-            $match->createMatch($fromUserId, $toUserId);
+        $from = $_SESSION['user_id'];
+        $to = $_GET['id'];
+
+        $db = Database::connect();
+        // LIKE speichern
+        $stmt = $db->prepare("
+            INSERT INTO likes (from_user_id, to_user_id)
+            VALUES (?, ?)
+        ");
+        $stmt->execute([$from, $to]);
+        //Gegenlike prüfen
+        $check = $db->prepare("
+            SELECT * FROM likes
+            WHERE from_user_id = ? AND to_user_id = ?
+        ");
+
+        $check->execute([$to, $from]);
+        if($check->rowCount() > 0) {
+            // MATCH!!
+            $match = $db->prepare("
+            INSERT INTO matches (user1_id, user2_id)
+            VALUES (?, ?)
+            ");
+            $match->execute([$from, $to]);
         }
 
         header('Location: playmatch.php');
