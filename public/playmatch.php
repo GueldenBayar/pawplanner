@@ -56,7 +56,7 @@ $randomDog = $filtered[array_rand($filtered)];
 
         <form method="POST" action="like.php">
             <input type="hidden" name="to_user_id" value="<?= $randomDog['user_id'] ?>">
-            <button type="submit">♥️ Like</button>
+            <button type="submit"><a href="like.php?id=<?= $dog['user_id'] ?>">♥️ Like</a></button>
         </form>
 
         <a href="playmatch.php"><button>❌ Nope</button></a>
