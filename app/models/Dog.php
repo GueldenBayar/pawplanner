@@ -8,10 +8,10 @@ class Dog {
         $this->db = Database::connect();
     }
 
-    public function create($userId, $name, $breed, $age, $description) {
+    public function create($userId, $name, $breed, $age, $description, $image) {
         $stmt = $this->db->prepare(
-            "INSERT INTO dogs (user_id, name, breed, age, description)
-            VALUES (?, ?, ?, ?, ?)
+            "INSERT INTO dogs (user_id, name, breed, age, description, image)
+            VALUES (?, ?, ?, ?, ?, ?)
         ");
 
         return $stmt->execute([
@@ -19,7 +19,8 @@ class Dog {
             $name,
             $breed,
             $age,
-            $description
+            $description,
+            $image
         ]);
     }
 
@@ -46,21 +47,4 @@ class Dog {
         $stmt = $this->db->prepare("DELETE FROM dogs WHERE id = ?");
         return $stmt->execute([$id]);
     }
-
-    public function create($userId, $name, $breed, $age, $description, $image) {
-        $stmt = $this->db->prepare("
-        INSERT INTO dogs (user_id, name, breed, age, description, image)
-        VALUES (?, ?, ?, ?, ?, ?)
-        ");
-
-        return $stmt->execute([
-            $userId,
-            $name,
-            $breed,
-            $age,
-            $description,
-            $image
-        ]);
-    }
-
 }
