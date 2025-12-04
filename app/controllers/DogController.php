@@ -1,5 +1,7 @@
 <?php
-require_once dirname(__DIR__) . '/models/Dog.php';
+session_start();
+
+require_once __DIR__ . '/../models/Dog.php';
 
 class DogController {
     public function store() {
@@ -19,7 +21,7 @@ class DogController {
                 //Bild wird physisch gespeichert -> nur der Name geht in die Datenbank
                 move_uploaded_file(
                     $_FILES['image']['tmp_name'],
-                    __DIR__ . '/../../public/uploads/dogs/' . $imageName
+                    __DIR__ . '/../../public/uploads/' . $imageName
                 );
             }
 

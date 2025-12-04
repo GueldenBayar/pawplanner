@@ -18,10 +18,11 @@ require_once __DIR__ . '/app/core/Database.php';
 <h2>Pawplanner - Match your furry friends!</h2>
 
 <ul>
-    <li><a href="">Home</a></li>
-    <li><a href="">Furry Match</a></li>
-    <li><a href="">Furr Friendly Map</a></li>
-    <li><a href="">Profile</a></li>
+    <li><a href="index.php">Home</a></li>
+    <li><a href="public/playmatch.php">Furry Match</a></li>
+    <li><a href="public/playmap.php">Furr Friendly Map</a></li>
+    <li><a href="public/login.php">Login</a></li>
+    <li><a href="public/register.php">Register</a></li>
 </ul>
 </body>
 </html>

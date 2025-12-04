@@ -1,9 +1,9 @@
 <?php
 
-namespace controllers;
-use User;
-
-require_once __DIR__ . '/../models/User.php';
+//namespace controllers;
+//use User;
+//
+//require_once __DIR__ . '/../models/User.php';
 
 class AuthController
 {
@@ -19,10 +19,11 @@ class AuthController
                 die("Die Felder sind Pflicht!");
             }
 
+            require_once __DIR__ . '/../models/User.php';
             $user = new User();
             $user->create($username, $email, $password);
 
-            header("Location: /pawplanner/login.php");
+            header("Location: /pawplanner/public/login.php");
             exit;
         }
     }
@@ -33,6 +34,7 @@ class AuthController
             $email = trim($_POST['email']);
             $password = $_POST['password'];
 
+            require_once __DIR__ . '/../models/User.php';
             $userModel = new User();
             $user = $userModel->findByEmail($email);
 
@@ -43,7 +45,7 @@ class AuthController
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
 
-            header("Location: /pawplanner/dashboard.php");
+            header("Location: /pawplanner/public/dashboard.php");
             exit;
         }
     }
@@ -51,7 +53,7 @@ class AuthController
     public function logout()
     {
         session_destroy();
-        header("Location: /pawplanner/login.php");
+        header("Location: /pawplanner/public/login.php");
         exit;
     }
 }
