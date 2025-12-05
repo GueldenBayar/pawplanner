@@ -15,12 +15,12 @@ require_once __DIR__ . '/app/core/Database.php';
     <title>Pawplanner - Home</title>
 </head>
 <body>
-<h2>Pawplanner - Match your furry friends!</h2>
+<h2>PawPlanner - Match your furry friends!</h2>
 
 <ul>
     <li><a href="index.php">Home</a></li>
-    <li><a href="public/playmatch.php">Furry Match</a></li>
-    <li><a href="public/playmap.php">Furr Friendly Map</a></li>
+    <li><a href="public/playmatch.php">Start PlayMatch</a></li>
+    <li><a href="public/playmap.php">Look at PlayMap</a></li>
     <li><a href="public/login.php">Login</a></li>
     <li><a href="public/register.php">Register</a></li>
 </ul>

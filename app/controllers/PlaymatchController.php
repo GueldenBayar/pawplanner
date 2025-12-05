@@ -8,7 +8,6 @@ class PlaymatchController {
         $dogModel = new Dog();
         return $dogModel->getAll();
     }
-
     // Für Likes and Matches
     public function like() {
         if (!isset($_SESSION['user_id'])) {
@@ -24,12 +23,22 @@ class PlaymatchController {
 
         $db = Database::connect();
 
+
+        // Like speichern
+        $stmt = $db->prepare("
+            INSERT INTO likes (from_user_id, to_user_id)
+            VALUES (?, ?)
+        ");
+        $stmt->execute([$from, $to]);
+
+        //Prüfen, ob Gegenlike existiert
         $check = $db->prepare("
             SELECT * FROM likes
             WHERE from_user_id = ? AND to_user_id = ?
         ");
         $check->execute([$to, $from]);
 
+        // Wenn ja, Match eintragen
         if ($check->rowCount() > 0) {
             $match = $db->prepare("
                 INSERT INTO matches (user1_id, user2_id)

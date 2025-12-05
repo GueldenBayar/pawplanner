@@ -54,7 +54,7 @@ $spots = $spotModel->getAll();
 <div id="map"></div>
 <script>
     //Karte starten
-    var map = L.map('map').setView([48.1371, 11.5753], 13);
+    var map = L.map('map').setView([52.520008, 13.404954], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
