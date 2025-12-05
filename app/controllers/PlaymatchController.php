@@ -45,9 +45,27 @@ class PlaymatchController {
                 VALUES (?, ?)
             ");
             $match->execute([$from, $to]);
-        }
 
+            header("Location: match.php?id=" . $to);
+            exit;
+        }
         header("Location: playmatch.php");
         exit;
+    }
+
+    public function getDogOwnerInfo($userId) {
+        $db = Database::connect();
+
+        // Einen Hund + Besitzer laden
+        $stmt = $db->prepare("
+            SELECT dogs.*, users.username
+            FROM dogs
+            JOIN users ON dogs.user_id = users.id
+            WHERE users.id = ?
+            LIMIT 1
+        ");
+        $stmt->execute([$userId]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

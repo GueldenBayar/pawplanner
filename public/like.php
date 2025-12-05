@@ -17,5 +17,5 @@ if ($controller->hasMatch($myUserId, $likedUserId)) {
 }
 
 // kein Match = nächste Karte
-header("Location: playmatch.php");
+header("Location: playmatch.php?match=1");
 exit;
