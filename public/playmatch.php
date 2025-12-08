@@ -137,17 +137,18 @@ $randomDog = $filtered[array_rand($filtered)];
 
         <div class="buttons">
             <form method="GET" action="like.php" style="display:inline;">
-                <input type="hidden" name="id" value="<?= $randomDog['user_id'] ?>">
-                <button type="submit" class="like">♥️ Like</button>
+                <input type="hidden" name="user_id" value="<?= $randomDog['user_id'] ?>">
+                <input type="hidden" name="dog_id" value="<?= $randomDog['id']?>">
+                <button type="submit" class="like">💖 Like</button>
             </form>
 
             <a href="playmatch.php">
-                <button class="nope">❌ Nope</button>
+                <button class="nope">🥲 Not for me</button>
             </a>
         </div>
     </div>
 
-    // Swipe Animation
+
     <script>
         const card = document.getElementById("card");
 

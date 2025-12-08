@@ -3,10 +3,8 @@ session_start();
 require_once __DIR__ . '/../app/controllers/PlaymatchController.php';
 
 $controller = new PlaymatchController();
-$matchUserId = $_GET['id'];
-
-$matchDog = $controller->getDogOwnerInfo($matchUserId);
-
+$dogId = $_GET['dog_id'];
+$matchDog = $controller->getDogById($dogId);
 ?>
 
 <!doctype html>

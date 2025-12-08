@@ -5,17 +5,17 @@ require_once __DIR__ . '/../app/controllers/PlaymatchController.php';
 $controller = new PlaymatchController();
 
 $myUserId = $_SESSION['user_id'];
-$likedUserId = $_GET['id'];
+$likedUserId = $_GET['user_id'];
+$likedUserId = $_GET['dog_id'];
 
-// Like speichern
-$controller->like($myUserId, $likedUserId);
+$isMatch = $controller->like($myUserId, $likedUserId, $likedDogId);
 
-// Prüfen, ob Match vorhanden
-if ($controller->hasMatch($myUserId, $likedUserId)) {
-    header("Location: match.php?id=" . $likedUserId);
+if ($isMatch) {
+    header("Location: match.php?dog_id=" . $likedDogId);
     exit;
 }
 
-// kein Match = nächste Karte
-header("Location: playmatch.php?match=1");
+header("Location: playmatch.php?match=0");
 exit;
+
+
