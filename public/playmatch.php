@@ -56,8 +56,8 @@ if (!empty($filtered)) {
     </div>
 
     <div id="buttons">
-        <button id="nope-btn">Nope</button>
-        <button id="like-btn">Like</button>
+        <button id="nope-btn">❌</button>
+        <button id="like-btn">💚</button>
     </div>
 
 </body>
