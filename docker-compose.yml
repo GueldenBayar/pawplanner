@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mariadb:10.4
+    container_name: pawplanner_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pawplanner
+      MYSQL_USER: pawuser
+      MYSQL_PASSWORD: pawpass
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pawplanner_pma
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: pawuser
+      PMA_PASSWORD: pawpass
+
+volumes:
+  db_data:

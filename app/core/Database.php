@@ -5,10 +5,10 @@ class Database {
     private $pdo;
 
     private function __construct() {
-        $host = 'localhost';
+        $host = '127.0.0.1';
         $db = 'pawplanner';
-        $user = 'root';
-        $pass = '';
+        $user = 'pawuser';
+        $pass = 'pawpass';
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
