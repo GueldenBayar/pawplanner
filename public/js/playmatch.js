@@ -21,7 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: `like=${like ? 1 : 0}&dog_id=${dogId}&user_id=${userId}`
-        });
+        })
+            .then(response => response.json()) // Wir erwarten JSON!!
+            .then(data => {
+                console.log(data); // Zum Debuggen
+
+                if (data.status === 'match') {
+                    // Hier passiert Weiterleitung durch JS
+                    window.location.href = "match.php?dog_id=" + data.dog_id;
+                }
+            })
+            .catch(err => console.error(err));
     }
 
     likeBtn.addEventListener("click", () => {
