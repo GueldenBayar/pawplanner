@@ -1,24 +1,31 @@
 <?php
 class MatchModel {
-    public function getMatchesForUser($userId) {
-        $db = Database::getInstance();
+   private $db;
 
-        $sql = "
-            SELECT
-                m.id,
+   public function __construct() {
+       $this->db = Database::connect();
+   }
+
+   public function getMatchesForUser($currentUserId) {
+       // Match holen und zwei Mal dogs Tabelle joinen
+       $sql = "
+            SELECT 
+                m.id as match_id,
                 d1.name AS myDogName,
                 d1.image AS myDogImg,
                 d2.name AS otherDogName,
                 d2.image AS otherDogImg
             FROM matches m 
-            JOIN dogs d1 ON d1.id = m.my_dog_id
-            JOIN dogs d2 ON d2.id = m.other_dog_id
-            WHERE m.user_id = ?
-            ORDER BY m.created_at DESC
-        ";
+            LEFT JOIN dogs d2 ON (d2.user_id = m.user1_id OR d2.user_id = m.user2_id)
 
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$userId]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+            WHERE m.user1_id = ? OR m.user2_id = ?
+            ORDER BY m.created_at DESC
+       ";
+
+       $stmt = $this->db->prepare($sql);
+        // ID 4x übergeben für die Platzhalter
+       $stmt->execute([$currentUserId, $currentUserId, $currentUserId, $currentUserId]);
+
+       return $stmt->fetchAll(PDO::FETCH_ASSOC);
+   }
 }
