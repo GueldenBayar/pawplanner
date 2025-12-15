@@ -1,21 +1,27 @@
+version: '3.8'
+
 services:
-  # --- Deine PHP Anwendung ---
+  # PHP Web Application
   web:
     build: .
     container_name: pawplanner_web
     ports:
-      - "8080:80" # Erreichbar unter localhost:8080
+      - "8080:80"
     volumes:
-      - ./:/var/www/html # Spiegelt deinen Code live in den Container
+      - ./:/var/www/html
     depends_on:
       - db
     environment:
       - DB_HOST=db
+      - DB_PORT=3306
       - DB_NAME=pawplanner
       - DB_USER=pawuser
       - DB_PASS=pawpass
+    networks:
+      - pawplanner_network
+    restart: unless-stopped
 
-  # --- Datenbank (MariaDB) ---
+  # MariaDB Datenbank
   db:
     image: mariadb:10.4
     container_name: pawplanner_db
@@ -29,10 +35,11 @@ services:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
-      # Automatischer Import der SQL beim ersten Start:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - pawplanner_network
 
-  # --- PhpMyAdmin ---
+  # PhpMyAdmin für DB Management
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: pawplanner_pma
@@ -43,6 +50,12 @@ services:
       PMA_HOST: db
       PMA_USER: pawuser
       PMA_PASSWORD: pawpass
+    networks:
+      - pawplanner_network
 
 volumes:
   db_data:
+
+networks:
+  pawplanner_network:
+    driver: bridge
