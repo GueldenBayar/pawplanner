@@ -1,1 +1,31 @@
+
+# Passwörter & Secrets
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PHP
+vendor/
+composer.lock
+
+# Logs
+logs/
+*.log
+
+# Uploads (optional - später konfigurieren)
+uploads/*
+!uploads/.gitkeep
+
+# Docker
+docker-compose.override.yml
